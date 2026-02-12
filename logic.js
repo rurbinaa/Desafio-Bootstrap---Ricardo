@@ -15,3 +15,20 @@
     const appContainer = document.getElementById('app');
     const btnLista = document.getElementById('btnLista');
     const btnCalendario = document.getElementById('btnCalendario');
+
+    renderLista();
+
+    function cambiarVista(vista) {
+        if (vista === 'lista') {
+            renderLista();
+            btnLista.classList.replace("btn-outline-primary", "btn-primary");
+            btnLista.classList.remove("btn-outline-secondary"); 
+            btnCalendario.className = "btn btn-outline-secondary";
+        } else {
+            renderCalendario();
+            btnCalendario.className = "btn btn-primary";
+            btnLista.className = "btn btn-outline-secondary";
+        }
+    }
+
+    
