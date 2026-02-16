@@ -58,13 +58,13 @@ function renderCalendario() {
         </thead>
         <tbody>`;
 
-    for (let hora = 8; hora <= 16; hora++) {
+    for (let hora = 8; hora <= 17; hora++) {
         html += `<tr><td class="bg-light fw-bold align-middle py-4">${hora}:00</td>`;
-        
+
         diasSemana.forEach(dia => {
             const m = materias.find(x => x.dia === dia && x.horaInicio === hora);
             const ocupado = materias.some(x => x.dia === dia && hora > x.horaInicio && hora < x.horaFin);
-            
+
             if (m) {
                 let rowspan = m.horaFin - m.horaInicio;
                 html += `<td rowspan="${rowspan}" class="table-primary border border-white align-middle position-relative p-2" style="background-color: cfe2ff;">
@@ -73,11 +73,12 @@ function renderCalendario() {
                                 <div class="small text-muted fw-bold">${m.aula}</div>
                              </td>`;
             } else if (!ocupado) {
-                    html += `<td></td>`;
-                }
+                html += `<td></td>`;
             }
         });
         html += `</tr>`;
     }
     appContainer.innerHTML = html + `</tbody></table>`;
 }
+
+
