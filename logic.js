@@ -19,15 +19,15 @@
     renderLista();
 
     function cambiarVista(vista) {
+        const vLista = document.getElementById('vistaLista');
+        const vCal = document.getElementById('vistaCalendario');
+
         if (vista === 'lista') {
-            renderLista();
-            btnLista.classList.replace("btn-outline-primary", "btn-primary");
-            btnLista.classList.remove("btn-outline-secondary"); 
-            btnCalendario.className = "btn btn-outline-secondary";
+            vLista.classList.remove('d-none');
+            vCal.classList.add('d-none');
         } else {
-            renderCalendario();
-            btnCalendario.className = "btn btn-primary";
-            btnLista.className = "btn btn-outline-secondary";
+            vLista.classList.add('d-none');
+            vCal.classList.remove('d-none');
         }
     }
 
