@@ -19,15 +19,14 @@ const btnCalendario = document.getElementById('btnCalendario');
 renderLista();
 
 function cambiarVista(vista) {
-    const vLista = document.getElementById('vistaLista');
-    const vCal = document.getElementById('vistaCalendario');
-
     if (vista === 'lista') {
-        vLista.classList.remove('d-none');
-        vCal.classList.add('d-none');
+        renderLista();
+        btnLista.className = 'btn btn-primary';
+        btnCalendario.className = 'btn btn-outline-secondary';
     } else {
-        vLista.classList.add('d-none');
-        vCal.classList.remove('d-none');
+        renderCalendario();
+        btnCalendario.className = 'btn btn-primary';
+        btnLista.className = 'btn btn-outline-secondary';
     }
 }
 
@@ -61,21 +60,20 @@ function renderCalendario() {
 
     for (let hora = 8; hora <= 16; hora++) {
         html += `<tr><td class="bg-light fw-bold align-middle py-4">${hora}:00</td>`;
-
+        
         diasSemana.forEach(dia => {
             const m = materias.find(x => x.dia === dia && x.horaInicio === hora);
-
+            const ocupado = materias.some(x => x.dia === dia && hora > x.horaInicio && hora < x.horaFin);
+            
             if (m) {
                 let rowspan = m.horaFin - m.horaInicio;
-                html += `<td rowspan="${rowspan}" class="table-primary border-start border-4 border-primary align-middle position-relative">
-                                <div class="fw-bold text-primary">${m.nombre}</div>
+                html += `<td rowspan="${rowspan}" class="table-primary border border-white align-middle position-relative p-2" style="background-color: cfe2ff;">
+                                <div class="fw-bold text-primary small">${m.nombre}</div>
                                 <span class="badge bg-primary mb-1">${m.grupo}</span>
-                                <div class="small text-muted">${m.aula}</div>
+                                <div class="small text-muted fw-bold">${m.aula}</div>
                              </td>`;
-            } else {
-                const ocupado = materias.some(x => x.dia === dia && hora > x.horaInicio && hora < x.horaFin);
-                if (!ocupado) {
-                    html += `<td class="py-4"></td>`;
+            } else if (!ocupado) {
+                    html += `<td></td>`;
                 }
             }
         });
