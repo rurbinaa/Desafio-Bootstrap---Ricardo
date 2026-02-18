@@ -7,6 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <style>
         .celda-calendario { height: 60px; vertical-align: middle; font-size: 0.85rem; }
+    
+        @media print {
+            body * { visibility: hidden; }
+            #app, #app * { visibility: visible; }
+            #app { position: absolute; left: 0; top: 0; width: 100%; }
+            .btn, .navbar, footer { display: none !important; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
     </style>
   </head>
   <body>
@@ -35,7 +43,7 @@
                 <button id="btnCalendario" onclick="cambiarVista('calendario')" class="btn btn-outline-secondary">VISTA CALENDARIO</button>
             </div>
             <div class="d-flex gap-2">
-                <button type="button" class="btn btn-outline-primary">IMPRIMIR</button>
+                <button type="button" onclick="window.print()" class="btn btn-outline-primary">IMPRIMIR</button>
                 <button type="button" class="btn btn-outline-primary">EXPORTAR</button>
                 <button type="button" class="btn btn-danger">SALIR</button>
             </div>
@@ -49,8 +57,7 @@
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="logic.js"></script>
 
   </body>
